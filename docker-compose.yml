@@ -1,0 +1,12 @@
+services:
+  kafka:
+    image: bitnami/kafka
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+    env_file:
+      - ./apps/event-organizer/.env
+    ports:
+      - '9092:9092'
+    volumes:
+      - $HOME/development/events-api/kafka:/bitnami/kafka

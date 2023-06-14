@@ -1,6 +1,6 @@
 import * as Joi from 'joi';
 
-export default Joi.object({
+export const API_ENV = Joi.object({
   API_PORT: Joi.number().required(),
   DB_HOST: Joi.string().required(),
   DB_PORT: Joi.number().default(5432).required(),
@@ -10,4 +10,10 @@ export default Joi.object({
   NODE_ENV: Joi.string()
     .valid('development', 'production', 'test', 'staging')
     .default('development'),
+});
+
+export const EVENT_ORG_ENV = Joi.object({
+  KAFKA_URI: Joi.string().required(),
+  KAFKA_GROUP_ID: Joi.string().required(),
+  KAFKA_CLIENT_ID: Joi.string().required(),
 });

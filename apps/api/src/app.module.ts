@@ -4,13 +4,13 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-import configSchema from '@event-app/shared/config';
+import { API_ENV } from '@event-app/shared/config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      validationSchema: configSchema,
+      validationSchema: API_ENV,
       envFilePath: './apps/api/.env',
     }),
     UserModule,
