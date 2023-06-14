@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto } from './dto/user.dto';
 import { UserRepository } from '@event-app/shared/database/repositories/user.repository';
+import { In } from 'typeorm';
+import { User } from '@event-app/shared/database/entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -14,18 +16,27 @@ export class UserService {
   }
 
   findAll() {
-    return `This action returns all user`;
+    return this.repository.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.repository.findOne({ where: { id: In([id])}});
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    const updatedUser = new User();
+    updatedUser.id = id;
+    return this.repository.findOneAndUpdate(CreateUserDto.from({...updateUserDto, ...updatedUser}));
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    const deletedUser = new User();
+    deletedUser.id = id;
+    try {
+      await this.repository.delete(deletedUser);
+      return { message: 'Record deleted successfully'};
+    } catch(error) {
+      throw error;
+    }
   }
 }

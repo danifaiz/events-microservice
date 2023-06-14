@@ -2,6 +2,7 @@ import { Logger, NotFoundException } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
 import {
   DataSource,
+  DeleteResult,
   FindOneOptions,
   In,
   QueryRunner,
@@ -17,6 +18,7 @@ export abstract class EntityRepository<TEntity extends Base> {
 
   constructor(dataSource: DataSource) {
     this.dataSource = dataSource;
+    
     this.queryRunner = this.dataSource.createQueryRunner();
   }
 
@@ -58,6 +60,15 @@ export abstract class EntityRepository<TEntity extends Base> {
 
   async findAll(): Promise<TEntity[]> {
     return this.repo.find();
+  }
+
+  async delete(entity: TEntity): Promise<TEntity>  {
+    // await this.dataSource.createQueryBuilder(this.queryRunner)
+    // .delete()
+    // .from("user")
+    // .where("id = :id", { id: entity.id })
+    // .execute();
+    return this.repo.remove(entity);
   }
 
   async initTransaction() {
