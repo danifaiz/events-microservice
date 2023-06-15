@@ -27,7 +27,7 @@ export class KafkaModule {
               },
               consumer: {
                 groupId: configService.get('KAFKA_GROUP_ID')
-              }
+              },
             }),
             inject: [ConfigService],
           },

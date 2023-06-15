@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 
 @Injectable()
 export class EventOrganizerService {
-  getHello(): string {
-    return 'Hello World!';
+  private readonly logger = new Logger(EventOrganizerService.name)
+
+  async createEventOrganizer(createDto: any) {
+    this.logger.log('Handle Creation Of Event Org', createDto);
   }
 }

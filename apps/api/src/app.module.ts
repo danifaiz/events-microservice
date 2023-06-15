@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { API_ENV } from '@event-app/shared/config';
+import { EventOrganizerModule } from './event-organizer/event-organizer.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { API_ENV } from '@event-app/shared/config';
     }),
     UserModule,
     DatabaseModule,
+    EventOrganizerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
