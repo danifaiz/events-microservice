@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
-import { DatabaseModule } from '@event-app/shared/database/db.module';
+import { DatabaseModule } from '@event-app/shared';
 
 @Module({
   imports: [DatabaseModule],

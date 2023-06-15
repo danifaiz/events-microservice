@@ -1,14 +1,13 @@
+import { CreateEventOrganizerDto, UpdateEventOrganizerDto } from '@event-app/shared';
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { EventOrganizerService } from './event-organizer.service';
-import { CreateEventOrganizerDto } from './dto/event-organizer.dto';
-import { UpdateEventOrganizerDto } from './dto/event-organizer.dto';
+import { EventOrganizerService } from './gateway.service';
 
-@Controller('event-organizer')
+@Controller('api')
 export class EventOrganizerController {
   constructor(private readonly eventOrganizerService: EventOrganizerService) {}
 
-  @Post()
-  create(@Body() createEventOrganizerDto: CreateEventOrganizerDto) {
+  @Post('event-organizer/create')
+  handleEventOrganizer(@Body() createEventOrganizerDto: CreateEventOrganizerDto) {
     return this.eventOrganizerService.create(createEventOrganizerDto);
   }
 

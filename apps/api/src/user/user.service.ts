@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/user.dto';
 import { UpdateUserDto } from './dto/user.dto';
-import { UserRepository } from '@event-app/shared/database/repositories/user.repository';
+import { UserRepository } from '@event-app/shared';
 import { In } from 'typeorm';
-import { User } from '@event-app/shared/database/entities/user.entity';
+import { User } from '@event-app/shared';
 
 @Injectable()
 export class UserService {

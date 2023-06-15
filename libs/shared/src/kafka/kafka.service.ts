@@ -6,16 +6,20 @@ import { KafkaOptions, Transport } from '@nestjs/microservices';
 export class KafkaService {
   constructor(private readonly configService: ConfigService) {}
 
-  getOptions(): KafkaOptions {
+  getOptions(clientId: string, groupId: string): KafkaOptions {
     return {
       transport: Transport.KAFKA,
       options: {
         client: {
+          clientId,
           brokers: [this.configService.get('KAFKA_URI')],
         },
+        consumer: {
+          groupId
+        },
         run: {
-          autoCommit: true
-        }
+          autoCommit: true,
+        },
       },
     };
   }

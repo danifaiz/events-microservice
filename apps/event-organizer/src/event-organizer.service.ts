@@ -6,5 +6,6 @@ export class EventOrganizerService {
 
   async createEventOrganizer(createDto: any) {
     this.logger.log('Handle Creation Of Event Org', createDto);
+    
   }
 }

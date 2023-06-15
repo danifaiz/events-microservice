@@ -1,11 +1,11 @@
-import { DatabaseModule } from '@event-app/shared/database/db.module';
+import { DatabaseModule } from '@event-app/shared';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-import { API_ENV } from '@event-app/shared/config';
-import { EventOrganizerModule } from './event-organizer/event-organizer.module';
+import { API_ENV } from '@event-app/shared';
+import { EventOrganizerModule } from './gateway/gateway.module';
 
 @Module({
   imports: [

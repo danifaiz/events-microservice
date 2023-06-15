@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ClientsModule, KafkaOptions, Transport } from '@nestjs/microservices';
 import { KafkaService } from './kafka.service';
 
 interface KafkaModuleOptions {
@@ -19,14 +19,17 @@ export class KafkaModule {
         ClientsModule.registerAsync([
           {
             name,
-            useFactory: (configService: ConfigService) => ({
+            useFactory: (configService: ConfigService): KafkaOptions => ({
               transport: Transport.KAFKA,
-              client: {
-                clientId: configService.get('KAFKA_CLIENT_ID'),
-                brokers: [configService.get('KAFKA_URI')],
-              },
-              consumer: {
-                groupId: configService.get('KAFKA_GROUP_ID')
+              options: {
+                client: {
+                  clientId: configService.get('KAFKA_CLIENT_ID'),
+                  brokers: [configService.get('KAFKA_URI')],
+                },
+                producerOnlyMode: true,
+                consumer: {
+                  groupId: configService.get('KAFKA_GROUP_ID'),
+                },
               },
             }),
             inject: [ConfigService],

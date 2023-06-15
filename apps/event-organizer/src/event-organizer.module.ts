@@ -1,10 +1,10 @@
-import { KafkaModule } from '@event-app/shared/kafka/kafka.module';
+import { KafkaModule } from '@event-app/shared';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventOrganizerController } from './event-organizer.controller';
 import { EventOrganizerService } from './event-organizer.service';
-import { EVENT_ORG_ENV } from '@event-app/shared/config';
-import { KafkaService } from '@event-app/shared/kafka/kafka.service';
+import { EVENT_ORG_ENV } from '@event-app/shared';
+import { KafkaService } from '@event-app/shared';
 
 @Module({
   imports: [

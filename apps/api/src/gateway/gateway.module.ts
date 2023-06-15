@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { EventOrganizerService } from './event-organizer.service';
-import { EventOrganizerController } from './event-organizer.controller';
-import { DatabaseModule } from '@event-app/shared/database/db.module';
-import { KafkaModule } from '@event-app/shared/kafka/kafka.module';
+import { EventOrganizerService } from './gateway.service';
+import { EventOrganizerController } from './gateway.controller';
+import { DatabaseModule } from '@event-app/shared';
+import { KafkaModule } from '@event-app/shared';
 import { EVENT_ORGANIZER_SERVICE } from 'apps/api/constants';
 
 @Module({

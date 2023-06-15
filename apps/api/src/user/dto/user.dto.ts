@@ -2,7 +2,7 @@ import { PartialType } from '@nestjs/mapped-types';
 
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from '@event-app/shared/database/entities/user.entity';
+import { User } from '@event-app/shared';
 
 export class CreateUserDto implements Readonly<CreateUserDto> {
   @ApiProperty({ required: true })
