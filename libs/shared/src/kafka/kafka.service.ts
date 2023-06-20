@@ -15,10 +15,7 @@ export class KafkaService {
           brokers: [this.configService.get('KAFKA_URI')],
         },
         consumer: {
-          groupId
-        },
-        run: {
-          autoCommit: true,
+          groupId: groupId
         },
       },
     };

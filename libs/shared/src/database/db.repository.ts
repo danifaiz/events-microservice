@@ -1,9 +1,9 @@
 import { Logger, NotFoundException } from '@nestjs/common';
-import { InjectDataSource } from '@nestjs/typeorm';
 import {
   DataSource,
   DeleteResult,
   FindOneOptions,
+  FindOptionsWhere,
   In,
   QueryRunner,
   Repository,
@@ -34,28 +34,7 @@ export abstract class EntityRepository<TEntity extends Base> {
       this.logger.warn('Record not found with options', options);
       throw new NotFoundException('Record not found.');
     }
-
     return record;
-  }
-
-  async findOneAndUpdate(data: TEntity) {
-    const options: FindOneOptions = {
-      where: {
-        id: In([data.id]),
-      },
-    };
-    const record = await this.repo.findOne(options);
-    if (!record) {
-      return Promise.reject();
-    }
-    const updatedRecord = await this.repo.save(data);
-
-    if (!updatedRecord) {
-      this.logger.warn(`Record not found with options:`, options);
-      throw new NotFoundException('Record not found.');
-    }
-
-    return updatedRecord;
   }
 
   async findAll(): Promise<TEntity[]> {

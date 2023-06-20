@@ -1,4 +1,4 @@
-import { KafkaModule } from '@event-app/shared';
+import { DatabaseModule, KafkaModule, OrganizerRepository } from '@event-app/shared';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventOrganizerController } from './event-organizer.controller';
@@ -14,8 +14,9 @@ import { KafkaService } from '@event-app/shared';
       envFilePath: './apps/event-organizer/.env',
     }),
     KafkaModule,
+    DatabaseModule
   ],
   controllers: [EventOrganizerController],
-  providers: [EventOrganizerService, KafkaService],
+  providers: [EventOrganizerService, KafkaService, OrganizerRepository],
 })
 export class EventOrganizerModule {}

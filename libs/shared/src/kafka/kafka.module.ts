@@ -26,9 +26,9 @@ export class KafkaModule {
                   clientId: configService.get('KAFKA_CLIENT_ID'),
                   brokers: [configService.get('KAFKA_URI')],
                 },
-                producerOnlyMode: true,
                 consumer: {
                   groupId: configService.get('KAFKA_GROUP_ID'),
+                  allowAutoTopicCreation: true,
                 },
               },
             }),

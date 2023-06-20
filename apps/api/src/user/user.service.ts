@@ -7,9 +7,7 @@ import { User } from '@event-app/shared';
 
 @Injectable()
 export class UserService {
-  constructor(
-    private readonly repository: UserRepository,
-  ) {}
+  constructor(private readonly repository: UserRepository) {}
 
   create(createUserDto: CreateUserDto) {
     return this.repository.create(createUserDto);
@@ -20,13 +18,16 @@ export class UserService {
   }
 
   findOne(id: number) {
-    return this.repository.findOne({ where: { id: In([id])}});
+    return this.repository.findOne({ where: { id: In([id]) } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
     const updatedUser = new User();
     updatedUser.id = id;
-    return this.repository.findOneAndUpdate(CreateUserDto.from({...updateUserDto, ...updatedUser}));
+    return this.repository.updateUser(
+      id,
+      CreateUserDto.from({ ...updateUserDto, ...updatedUser }),
+    );
   }
 
   async remove(id: number) {
@@ -34,8 +35,8 @@ export class UserService {
     deletedUser.id = id;
     try {
       await this.repository.delete(deletedUser);
-      return { message: 'Record deleted successfully'};
-    } catch(error) {
+      return { message: 'Record deleted successfully' };
+    } catch (error) {
       throw error;
     }
   }

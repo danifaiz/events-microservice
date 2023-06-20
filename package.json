@@ -30,6 +30,7 @@
     "@nestjs/typeorm": "^9.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "crypto": "^1.0.1",
     "joi": "^17.9.2",
     "kafkajs": "^2.2.4",
     "pg": "^8.11.0",

@@ -64,3 +64,31 @@ STATEMENT:  INSERT INTO "user"("created_at", "updated_at", "firstName", "lastNam
 ERROR:  null value in column "email" violates not-null constraint
 DETAIL:  Failing row contains (4, 2023-06-14 02:37:03.095306, 2023-06-14 02:37:03.095306, Daniyal, Ahmed, null, t).
 STATEMENT:  INSERT INTO "user"("created_at", "updated_at", "firstName", "lastName", "email", "isActive") VALUES (DEFAULT, DEFAULT, $1, $2, DEFAULT, DEFAULT) RETURNING "id", "created_at", "updated_at", "isActive"
+FATAL:  database "daniyal" does not exist
+FATAL:  database "daniyal" does not exist
+FATAL:  database "daniyal" does not exist
+FATAL:  database "daniyal" does not exist
+ERROR:  syntax error at or near "use" at character 1
+STATEMENT:  use database eventmanagement;
+ERROR:  syntax error at or near "use" at character 1
+STATEMENT:  use database eventmanagement;
+ERROR:  syntax error at or near "use" at character 1
+STATEMENT:  use database eventmanagement
+	use eventmanagement
+	;
+FATAL:  database "daniyal" does not exist
+ERROR:  null value in column "email" violates not-null constraint
+DETAIL:  Failing row contains (9, 2023-06-21 00:01:13.314429, 2023-06-21 00:01:13.314429, my-event, null, null).
+STATEMENT:  INSERT INTO "organizer"("created_at", "updated_at", "name", "email", "contact") VALUES (DEFAULT, DEFAULT, $1, DEFAULT, DEFAULT) RETURNING "id", "created_at", "updated_at"
+ERROR:  null value in column "email" violates not-null constraint
+DETAIL:  Failing row contains (16, 2023-06-21 00:23:15.342206, 2023-06-21 00:23:15.342206, my-event, null, null).
+STATEMENT:  INSERT INTO "organizer"("created_at", "updated_at", "name", "email", "contact") VALUES (DEFAULT, DEFAULT, $1, DEFAULT, DEFAULT) RETURNING "id", "created_at", "updated_at"
+ERROR:  null value in column "email" violates not-null constraint
+DETAIL:  Failing row contains (17, 2023-06-21 00:24:55.584969, 2023-06-21 00:24:55.584969, my-event, null, null).
+STATEMENT:  INSERT INTO "organizer"("created_at", "updated_at", "name", "email", "contact") VALUES (DEFAULT, DEFAULT, $1, DEFAULT, DEFAULT) RETURNING "id", "created_at", "updated_at"
+ERROR:  null value in column "email" violates not-null constraint
+DETAIL:  Failing row contains (18, 2023-06-21 00:26:55.860365, 2023-06-21 00:26:55.860365, my-event, null, null).
+STATEMENT:  INSERT INTO "organizer"("created_at", "updated_at", "name", "email", "contact") VALUES (DEFAULT, DEFAULT, $1, DEFAULT, DEFAULT) RETURNING "id", "created_at", "updated_at"
+ERROR:  null value in column "email" violates not-null constraint
+DETAIL:  Failing row contains (19, 2023-06-21 00:30:16.64799, 2023-06-21 00:30:16.64799, my-event, null, null).
+STATEMENT:  INSERT INTO "organizer"("created_at", "updated_at", "name", "email", "contact") VALUES (DEFAULT, DEFAULT, $1, DEFAULT, DEFAULT) RETURNING "id", "created_at", "updated_at"

@@ -1,43 +1,93 @@
-import { CreateEventOrganizerDto, UpdateEventOrganizerDto } from '@event-app/shared';
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import {
+  CreateEventOrganizerDto,
+  UpdateEventOrganizerDto,
+} from '@event-app/shared';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { EVENT_ORGANIZER_SERVICE } from 'apps/api/constants';
+import { catchError, lastValueFrom, tap } from 'rxjs';
 
 @Injectable()
 export class EventOrganizerService {
   private readonly logger = new Logger('EventOrganizer.Service');
 
   constructor(
-    @Inject(EVENT_ORGANIZER_SERVICE) private kafkaClient: ClientKafka
-  ) {
-  }
+    @Inject(EVENT_ORGANIZER_SERVICE) private kafkaClient: ClientKafka,
+  ) {}
 
   onModuleInit() {
     this.logger.log(`API Gateway Module has initialized `);
-    this.kafkaClient.subscribeToResponseOf('organizer_created');
+    const requestPatterns = [
+      'organizer.create',
+      'organizer.all',
+      'organizer.find',
+      'organizer.update',
+      'organizer.delete'
+    ];
+
+    requestPatterns.forEach(pattern => {
+      this.kafkaClient.subscribeToResponseOf(pattern);
+    });
+
   }
 
-  async create(createEventOrganizerDto: CreateEventOrganizerDto) {
+  async createEventOrganizer(createEventOrganizerDto: CreateEventOrganizerDto) {
     try {
-      this.kafkaClient.emit('organizer_created', createEventOrganizerDto);
-    } catch(error) {
+      const result = await lastValueFrom(
+        this.kafkaClient.send('organizer.create', createEventOrganizerDto),
+      );
+      return result;
+    } catch (error) {
       throw error;
     }
   }
 
-  findAll() {
-    return `This action returns all eventOrganizer`;
+  async findAllEventOrganizer() {
+    try {
+      const result = await lastValueFrom(
+        this.kafkaClient.send('organizer.all', {key: 1}),
+      );
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} eventOrganizer`;
+  async findOneEventOrganizer(id: number) {
+    try {
+      const result = await lastValueFrom(
+        this.kafkaClient.send('organizer.find', {id }),
+      );
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
-  update(id: number, updateEventOrganizerDto: UpdateEventOrganizerDto) {
-    return `This action updates a #${id} eventOrganizer`;
+  async updateEventOrganizer(id: number, updateEventOrganizerDto: UpdateEventOrganizerDto) {
+    try {
+      const result = await lastValueFrom(
+        this.kafkaClient.send('organizer.update', { id, ...updateEventOrganizerDto }),
+      );
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} eventOrganizer`;
+  async removeEventOrganizer(id: number) {
+    try {
+      const result = await lastValueFrom(
+        this.kafkaClient.send('organizer.delete', { id }),
+      );
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 }

@@ -7,27 +7,27 @@ export class EventOrganizerController {
   constructor(private readonly eventOrganizerService: EventOrganizerService) {}
 
   @Post('event-organizer/create')
-  handleEventOrganizer(@Body() createEventOrganizerDto: CreateEventOrganizerDto) {
-    return this.eventOrganizerService.create(createEventOrganizerDto);
+  createEventOrganizer(@Body() createEventOrganizerDto: CreateEventOrganizerDto) {
+    return this.eventOrganizerService.createEventOrganizer(createEventOrganizerDto);
   }
 
-  @Get()
-  findAll() {
-    return this.eventOrganizerService.findAll();
+  @Get('event-organizer/list')
+  findAllEventOrganizer() {
+    return this.eventOrganizerService.findAllEventOrganizer();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.eventOrganizerService.findOne(+id);
+  @Get('event-organizer/:id')
+  findOneEventOrganizer(@Param('id') id: string) {
+    return this.eventOrganizerService.findOneEventOrganizer(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventOrganizerDto: UpdateEventOrganizerDto) {
-    return this.eventOrganizerService.update(+id, updateEventOrganizerDto);
+  @Patch('event-organizer/:id')
+  updateEventOrganizer(@Param('id') id: string, @Body() updateEventOrganizerDto: UpdateEventOrganizerDto) {
+    return this.eventOrganizerService.updateEventOrganizer(+id, updateEventOrganizerDto);
   }
 
-  @Delete(':id')
+  @Delete('event-organizer/:id')
   remove(@Param('id') id: string) {
-    return this.eventOrganizerService.remove(+id);
+    return this.eventOrganizerService.removeEventOrganizer(+id);
   }
 }
