@@ -11,10 +11,15 @@ export class Event extends Base {
   @Column()
   startDate: Date;
 
+  @Column()
+  location: string;
+
+  @Column("text")
+  description: string;
+
   @ManyToOne(() => User, (user) => user.attendedEvents)
   attendees: User;
 
   @ManyToOne(() => Organizer, (organizer) => organizer.createdEvents)
   organizer: Organizer;
-  
 }

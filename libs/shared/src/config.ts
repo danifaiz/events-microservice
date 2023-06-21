@@ -17,3 +17,9 @@ export const EVENT_ORG_ENV = Joi.object({
   KAFKA_GROUP_ID: Joi.string().required(),
   KAFKA_CLIENT_ID: Joi.string().required(),
 });
+
+export const EVENT_ENV = Joi.object({
+  KAFKA_URI: Joi.string().required(),
+  KAFKA_GROUP_ID: Joi.string().required(),
+  KAFKA_CLIENT_ID: Joi.string().required(),
+});

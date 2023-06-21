@@ -35,7 +35,6 @@ export class UserRepository extends EntityRepository<User> {
         isActive: user.isActive
       },
     );
-    console.log('org', org)
     return org;
   };
 }

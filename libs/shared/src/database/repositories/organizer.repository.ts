@@ -32,7 +32,6 @@ export class OrganizerRepository extends EntityRepository<Organizer> {
       },
     };
     const existedOrganizer = await this.repo.findOne(options);
-    console.log('hello', existedOrganizer);
     if (!existedOrganizer) {
       return Promise.reject('Record you are updating does not exist');
     }

@@ -92,3 +92,6 @@ STATEMENT:  INSERT INTO "organizer"("created_at", "updated_at", "name", "email",
 ERROR:  null value in column "email" violates not-null constraint
 DETAIL:  Failing row contains (19, 2023-06-21 00:30:16.64799, 2023-06-21 00:30:16.64799, my-event, null, null).
 STATEMENT:  INSERT INTO "organizer"("created_at", "updated_at", "name", "email", "contact") VALUES (DEFAULT, DEFAULT, $1, DEFAULT, DEFAULT) RETURNING "id", "created_at", "updated_at"
+ERROR:  update or delete on table "organizer" violates foreign key constraint "FK_19642e6a244b4885e14eab0fdc0" on table "event"
+DETAIL:  Key (id)=(1) is still referenced from table "event".
+STATEMENT:  DELETE FROM "organizer" WHERE "id" = $1

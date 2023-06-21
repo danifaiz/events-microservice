@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { EventOrganizerService } from './gateway.service';
-import { EventOrganizerController } from './gateway.controller';
+import { GatewayService } from './gateway.service';
+import { GatewayController } from './gateway.controller';
 import { DatabaseModule } from '@event-app/shared';
 import { KafkaModule } from '@event-app/shared';
-import { EVENT_ORGANIZER_SERVICE } from 'apps/api/constants';
+import { EVENT_MANAGEMENT_SERVICE, EVENT_ORGANIZER_SERVICE } from 'apps/api/constants';
 
 @Module({
   imports: [
@@ -11,9 +11,12 @@ import { EVENT_ORGANIZER_SERVICE } from 'apps/api/constants';
     KafkaModule.register({
       name: EVENT_ORGANIZER_SERVICE,
     }),
+    KafkaModule.register({
+      name: EVENT_MANAGEMENT_SERVICE,
+    })
   ],
-  controllers: [EventOrganizerController],
-  providers: [EventOrganizerService],
+  controllers: [GatewayController],
+  providers: [GatewayService],
   exports: []
 })
-export class EventOrganizerModule {}
+export class GatewayModule {}

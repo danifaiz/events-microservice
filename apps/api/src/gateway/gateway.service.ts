@@ -2,6 +2,7 @@ import {
   CreateEventOrganizerDto,
   UpdateEventOrganizerDto,
 } from '@event-app/shared';
+import { CreateEventDto } from '@event-app/shared/dto/event.dto';
 import {
   BadRequestException,
   Inject,
@@ -13,8 +14,8 @@ import { EVENT_ORGANIZER_SERVICE } from 'apps/api/constants';
 import { catchError, lastValueFrom, tap } from 'rxjs';
 
 @Injectable()
-export class EventOrganizerService {
-  private readonly logger = new Logger('EventOrganizer.Service');
+export class GatewayService {
+  private readonly logger = new Logger('GatewayService.Service');
 
   constructor(
     @Inject(EVENT_ORGANIZER_SERVICE) private kafkaClient: ClientKafka,
@@ -27,7 +28,8 @@ export class EventOrganizerService {
       'organizer.all',
       'organizer.find',
       'organizer.update',
-      'organizer.delete'
+      'organizer.delete',
+      'event.create'
     ];
 
     requestPatterns.forEach(pattern => {
@@ -84,6 +86,17 @@ export class EventOrganizerService {
     try {
       const result = await lastValueFrom(
         this.kafkaClient.send('organizer.delete', { id }),
+      );
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createEvent(createEventDto: CreateEventDto) {
+    try {
+      const result = await lastValueFrom(
+        this.kafkaClient.send('event.create', createEventDto),
       );
       return result;
     } catch (error) {
